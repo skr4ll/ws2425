@@ -1,0 +1,91 @@
+/* w3schools */
+*{
+    box-sizing: border-box;
+}
+
+
+/* Element Deklaration */
+body{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 140%;
+}
+input{
+    border-color: aquamarine;
+    border-radius: 5px;
+}
+
+ol, ul{
+    padding-bottom: 3%;
+    padding-top: 3%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+
+/* Klassen Deklarationen */
+.elementWithBorder{
+    border:3px solid black;
+    border-radius: 5px;
+}
+.bodyContentChild{
+    display: inline-block;
+}
+.sidebarElement{
+    float: left;
+    overflow: auto;
+    width: 25%;
+}
+.centerElement{
+    width: 60%;
+    padding-left: 5%;
+}
+.columnElement{
+    float: left;
+    overflow: auto;
+    width: 40%;
+    margin-right: 3%;
+}
+
+/* Identifier Deklaration */
+#restbetragBerechnung{
+    padding-top: 1%;
+    color: bisque;
+    width: 50%;
+    background-color:black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#inputField{
+    width: 35%;
+    font-size: large;
+    border: none;
+    padding: 1% 1%;
+}
+#submitButton{
+    width: 30%;
+    margin-left: 5%;
+    padding: 1% 1%;
+    /* font-size: large; */
+    color: white;
+    background-color: dimgray;
+    border: none;
+}
+#submitButton:hover{
+    background-color: green;
+}
+#resultText{
+    text-align: center;
+}
+#result{
+    font-weight: bolder;
+    font-size: xx-large;
+    text-align: center;
+}
+#rndPic{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

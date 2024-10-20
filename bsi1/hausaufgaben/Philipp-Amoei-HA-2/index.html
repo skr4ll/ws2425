@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+    
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betragsverteilung auf Monat etc.</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">    
+    <link rel="stylesheet" href="style.css"> 
+	  <script src="script.js" defer></script>
+  </head>
+    
+  <body>
+    <div id="bodyContent">
+    <!-- Diese Seite ist aufgeteilt in eine Seitenleiste und einen Centerbereich   -->
+      <!-- Bereich für die Sidebar: -->
+      <div id="sidebarContainer" class="bodyContentChild sidebarElement">  
+        <!-- Die ungeordnete Liste mit Beispiellinks und Zugang zu der 2. Seite namens "videos.html" im Ordner "pages" -->
+        <h3 id="links">Links</h3>
+        <ul class="elementWithBorder">
+          <li> <a href="https://github.com/skr4ll" target="_blank">Mein GitHub</a></li>
+          <li> <a href="https://www.youtube.com/" target="_blank">YouTube</a></li>
+          <li> <a href="pages/sammlung.html">Sammlung</a></li>
+          <li> <a href="img">Bilderordner</a></li>
+        </ul>
+        <!-- Geordnete Liste als Rangliste meiner Lieblingsbands -->
+        <h3>Meine Top 3 Bands</h3>
+        <ol class="elementWithBorder">
+          <li><a href="https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9?si=GrO2H9skT9yh_BYTBXTg8Q">Pink Floyd</a></li>
+          <li><a href="https://open.spotify.com/intl-de/artist/5NXHXK6hOCotCF8lvGM1I0?si=Z5gBvHQwQDyOMNGS8zJwAA">Porcupine Tree</a></li>
+          <li><a href="https://open.spotify.com/artist/2aaLAng2L2aWD2FClzwiep?si=H4C6vQK7RCygcbhzwozAfQ">Dream Theater</a></li>
+        </ol>
+        <!-- Tabelle mit jeweils einem Lied der o.g. Bands -->
+        <h3>Einige Lieder der Bands</h3>
+          <table>
+            <tr>
+              <th>Interpret</th>
+              <th>Titel</th>
+            </tr>
+            <tr>
+              <td>Pink Floyd</td>
+              <td>Echoes</td>
+            </tr>
+            <tr>
+              <td>Porcupine Tree</td>
+              <td>Arriving Somewhere But Not Here</td>
+            </tr>
+            <tr>
+              <td>Dream Theater</td>
+              <td>Octavarium</td>
+            </tr>
+          </table>
+        </div>
+        <!-- Bereich für die Centerelements -->
+        <div id="centerContainer" class="bodyContentChild centerElement">
+          <!-- Beschreibung der Funktionalität des Betragsrechners -->
+            <h1>Erste Hausaufgabe von Philipp Amoei</h1>
+            <p>Da das verfügbare Geld bei Studenten, gerade wenn sich der Monat dem Ende zuneigt, oft knapp werden kann (&#128531;&#128531;&#128531;), soll hier anhand des aktuellen Datums und eines Betrags, 
+              den man eingeben kann (Inputfeld), die Verteilung dieses Betrages auf die restlichen Tage des aktuellen Monats berechnet werden. Dies hilft hoffentlich beim Überblickbehalten!</p>
+          <!-- Eingabefeld für den Betragsrechner -->        
+          <div id="restbetragBerechnung" class="elementWithBorder">
+            <form id="amount" action="javascript:;" onsubmit="calcAmountPerDay()">
+              <label id="betragLabel" for="betrag">Betrag:</label>
+              <input type="text" name="betrag" id="inputField">
+              <input id="submitButton" type="submit" value="Berechnen">
+            </form>
+            <p id="resultText"></p>
+              <div id="result">
+                <div id="resultImg">
+                </div>
+              </div>     
+          </div>
+          <!-- Ein zufälliges Bild -->
+          <p>Hier ein random Bild über absoluten Pfad zur entsprechenden Site: <br></p>
+          <img id="rndPic" src="https://picsum.photos/200" alt="Nix">
+        </div>
+    </div>
+  </body>
+</html>
+
