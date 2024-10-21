@@ -11,7 +11,6 @@
   </head>
     
   <body>
-    <div id="bodyContent">
     <!-- Diese Seite ist aufgeteilt in eine Seitenleiste und einen Centerbereich   -->
       <!-- Bereich für die Sidebar: -->
       <div id="sidebarContainer" class="bodyContentChild sidebarElement">  
@@ -54,27 +53,73 @@
         <!-- Bereich für die Centerelements -->
         <div id="centerContainer" class="bodyContentChild centerElement">
           <!-- Beschreibung der Funktionalität des Betragsrechners -->
-            <h1>Erste Hausaufgabe von Philipp Amoei</h1>
-            <p>Da das verfügbare Geld bei Studenten, gerade wenn sich der Monat dem Ende zuneigt, oft knapp werden kann (&#128531;&#128531;&#128531;), soll hier anhand des aktuellen Datums und eines Betrags, 
-              den man eingeben kann (Inputfeld), die Verteilung dieses Betrages auf die restlichen Tage des aktuellen Monats berechnet werden. Dies hilft hoffentlich beim Überblickbehalten!</p>
-          <!-- Eingabefeld für den Betragsrechner -->        
-          <div id="restbetragBerechnung" class="elementWithBorder">
-            <form id="amount" action="javascript:;" onsubmit="calcAmountPerDay()">
-              <label id="betragLabel" for="betrag">Betrag:</label>
-              <input type="text" name="betrag" id="inputField">
-              <input id="submitButton" type="submit" value="Berechnen">
-            </form>
-            <p id="resultText"></p>
-              <div id="result">
-                <div id="resultImg">
-                </div>
-              </div>     
+          <!--   <h1>Zweite Hausaufgabe von Philipp Amoei</h1> -->
+          <!--   <p>Da das verfügbare Geld bei Studenten, gerade wenn sich der Monat dem Ende zuneigt, oft knapp werden kann (&#128531;&#128531;&#128531;), soll hier anhand des aktuellen Datums und eines Betrags,  -->
+          <!--     den man eingeben kann (Inputfeld), die Verteilung dieses Betrages auf die restlichen Tage des aktuellen Monats berechnet werden. Dies hilft hoffentlich beim Überblickbehalten!</p> -->
+          <!-- <!-- Eingabefeld für den Betragsrechner -->
+          <!-- <div id="restbetragBerechnung" class="elementWithBorder"> -->
+          <!--   <form id="amount" action="javascript:;" onsubmit="calcAmountPerDay()"> -->
+          <!--     <label id="betragLabel" for="betrag">Betrag:</label> -->
+          <!--     <input type="text" name="betrag" id="inputField"> -->
+          <!--     <input id="submitButton" type="submit" value="Berechnen"> -->
+          <!--   </form> -->
+          <!--   <p id="resultText"></p> -->
+          <!--     <div id="result"> -->
+          <!--       <div id="resultImg"> -->
+          <!--       </div> -->
+          <!--     </div>      -->
+          <!-- </div> -->
+          <!-- <!-- Ein zufälliges Bild -->
+          <!-- <p>Hier ein random Bild über absoluten Pfad zur entsprechenden Site: <br></p> -->
+          <!-- <img id="rndPic" src="https://picsum.photos/200" alt="Nix"> -->
+          <!-- <br>  -->
+          <!-- Erweiterungen 2. HA -->
+          <!-- Eingabeelemente Nutzerdaten -->
+        <h3>Personliche Daten (HA 2)</h3>
+        <div id="divEingabebereich">
+          <div id="divTextUndSelect">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email">
+              <label for="alter">Alter:</label>
+              <input type="number" id="alter" name="alter">
+              <label for="genre">Filmgenre:</label>
+              <select id="genre" name="genre">
+                <option value="action">Action</option>
+                <option value="drama">Drama</option>
+                <option value="komoedie">Komödie</option>
+                <option value="horror">Horror</option>
+              </select>
           </div>
-          <!-- Ein zufälliges Bild -->
-          <p>Hier ein random Bild über absoluten Pfad zur entsprechenden Site: <br></p>
-          <img id="rndPic" src="https://picsum.photos/200" alt="Nix">
+          <div class="columnElement" id="divRadios">
+            <p>Lieblingstier?</p>
+            <input type="radio" id="leguan" name="lieblingstier" value="Leguan">
+            <label for="leguan">Leguan</label><br>
+            <input type="radio" id="elch" name="lieblingstier" value="Elch">
+            <label for="elch">Elch</label><br>
+            <input type="radio" id="esel" name="lieblingstier" value="Esel">
+            <label for="esel">Eseleselese</label> <br>
+            <input type="radio" id="keins" name="lieblingstier" value="keins">
+            <label for="keins">Keins_davon</label><br>
+          </div>
+          <div class="columnElement" id="divCheckbox">
+            <p>Interessen?</p>
+            <input type="checkbox" id="musik" name="interessen" value="musik">
+            <label for="musik">Musik</label><br>
+            <input type="checkbox" id="sport" name="interessen" value="sport">
+            <label for="sport">Sport</label><br>
+            <input type="checkbox" id="lesen" name="interessen" value="lesen">
+            <label for="lesen">Lesen</label><br>
+            <input type="checkbox" id="andere" name="interessen" value="andere">
+            <label for="andere">Andere</label>
+          </div>
         </div>
-    </div>
+        <br>
+          <label for="meinung">Deine Meinung:</label><br>
+          <textarea id="meinung" name="meinung" rows="4" cols="50" placeholder="Irgendwelche Comments? ..."></textarea>
+          <button class="button" id="eingabeButton" type="button">Fertig</button>
+      </div>
   </body>
 </html>
 

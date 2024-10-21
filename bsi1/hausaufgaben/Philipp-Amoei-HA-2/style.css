@@ -25,6 +25,17 @@ table, th, td {
 
 
 /* Klassen Deklarationen */
+.button{
+    margin-left: 5%;
+    padding: 1% 1%;
+    color: white;
+    background-color: dimgray;
+    border: none;
+}
+.button:hover{
+    background-color: green;
+}
+
 .elementWithBorder{
     border:3px solid black;
     border-radius: 5px;
@@ -38,17 +49,33 @@ table, th, td {
     width: 25%;
 }
 .centerElement{
-    width: 60%;
+    width: 75%;
     padding-left: 5%;
 }
 .columnElement{
     float: left;
     overflow: auto;
-    width: 40%;
+    width: 21%;
     margin-right: 3%;
 }
 
 /* Identifier Deklaration */
+/*#divCheckbox{*/
+/*  float: right;*/
+/*}*/
+#divRadios{
+  width: 60%;
+  margin-right: -30%;
+}
+#alter{
+  width: 5%;
+}
+#divTextUndSelect{
+  font-size: medium;
+}
+#divSelectbox{
+  float: right;
+}
 #restbetragBerechnung{
     padding-top: 1%;
     color: bisque;
@@ -66,16 +93,14 @@ table, th, td {
 }
 #submitButton{
     width: 30%;
-    margin-left: 5%;
-    padding: 1% 1%;
-    /* font-size: large; */
-    color: white;
-    background-color: dimgray;
-    border: none;
 }
-#submitButton:hover{
-    background-color: green;
-}
+#eingabeButton{
+  width: 100px;
+  height: 100px;
+  font-weight: bold;
+  font-size: large;
+  margin: 3% 0% 0% 15%;
+i
 #resultText{
     text-align: center;
 }
