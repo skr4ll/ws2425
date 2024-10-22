@@ -22,7 +22,12 @@ table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
-
+textarea{
+    
+    padding-left: -10%;
+    margin-right: -10%;
+    background-color: rgb(127, 219, 255);
+}
 
 /* Klassen Deklarationen */
 .button{
@@ -60,18 +65,21 @@ table, th, td {
 }
 
 /* Identifier Deklaration */
-/*#divCheckbox{*/
-/*  float: right;*/
-/*}*/
+
+#divErrorMessage{
+    color: red;
+}
 #divRadios{
   width: 60%;
-  margin-right: -30%;
+  margin-right: -40%;
+  overflow: auto;
 }
 #alter{
   width: 5%;
 }
 #divTextUndSelect{
   font-size: medium;
+  margin-bottom: 1%;
 }
 #divSelectbox{
   float: right;
@@ -94,13 +102,16 @@ table, th, td {
 #submitButton{
     width: 30%;
 }
+#divUserDaten{
+    margin-top: 5%;
+}
 #eingabeButton{
   width: 100px;
   height: 100px;
   font-weight: bold;
   font-size: large;
   margin: 3% 0% 0% 15%;
-i
+}
 #resultText{
     text-align: center;
 }
@@ -113,4 +124,17 @@ i
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+/* Einzelne Punkte der radios und checkbox */
+#lbLeguan{
+    background-color: forestgreen;
+}
+#lbElch{
+    background-color: rgb(166, 90, 36);
+}
+#lbEsel{
+    background-color: grey;
+}
+#lbKeins{
+    background-color: darkorchid;
 }

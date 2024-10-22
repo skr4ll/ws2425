@@ -1,33 +1,46 @@
-// Initialer Alert
-// alert("Hallo");
-//
-// if (confirm("Seite betreten?")) {
-//     // Der alert im if Block
-//     alert("Confirm wurde gegeben: Willkommen auf der Seite");
-//     // Die Abfrage der präferierten Farbe. Der default case weiß ist sehr zu empfehlen hinsichtlich der Augengesundheit
-//     let col = prompt("Farbe (red, purple, blue)? Default = weiß");
-//     // Nur wenn eine der 3 Farben eingegeben wird, wird etwas gemacht
-//     switch (col) {
-//         case "red":
-//         case "purple":
-//         case "blue":
-//             document.body.style.backgroundColor = col;
-//         break;
-//     } 
-// } 
-// else {
-//     // Der Alert im else block
-//     alert("Kein confirm: Hau rein");
-//     // Überschrift und Bildelement erzeugen, wenn Confirm nicht gegeben
-//     const cya = document.createElement("h3");
-//     cya.innerHTML = "CYAAAAAAAAAAA!";
-//     const gifCya = document.createElement("img");
-//     gifCya.src = "img/cya.gif";  
-//     // Alle Kindelemente von body durch die beiden oben erzeugten Elemente ersetzen
-//     document.body.replaceChildren(cya, gifCya);
-// }
-//
-// Die Berechnung des Betrags pro Tag
+// Konstante für die Abfrage der Eingabe aus HA2
+const inputFieldName = document.getElementById("name");
+const inputFieldEmail  = document.getElementById("email");
+const inputFieldAlter = document.getElementById("alter");
+const selectBox = document.getElementById("genre");
+const errorDiv = document.getElementById("divErrorMessage");
+const meinung = document.getElementById("meinung");
+const textfeldDiv = document.getElementById("divTextfeld");
+const userDatenDiv = document.getElementById("divUserDaten");
+// regex für die Email (kopiert aus StackOverflow)
+const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+// ERSTER PART HA1, auskommentiert weil nervig:
+/**** Initialer Alert
+alert("Hallo");
+
+if (confirm("Seite betreten?")) {
+    // Der alert im if Block
+    alert("Confirm wurde gegeben: Willkommen auf der Seite");
+    // Die Abfrage der präferierten Farbe. Der default case weiß ist sehr zu empfehlen hinsichtlich der Augengesundheit
+    let col = prompt("Farbe (red, purple, blue)? Default = weiß");
+    // Nur wenn eine der 3 Farben eingegeben wird, wird etwas gemacht
+    switch (col) {
+        case "red":
+        case "purple":
+        case "blue":
+            document.body.style.backgroundColor = col;
+        break;
+    } 
+} 
+else {
+    // Der Alert im else block
+    alert("Kein confirm: Hau rein");
+    // Überschrift und Bildelement erzeugen, wenn Confirm nicht gegeben
+    const cya = document.createElement("h3");
+    cya.innerHTML = "CYAAAAAAAAAAA!";
+    const gifCya = document.createElement("img");
+    gifCya.src = "img/cya.gif";  
+    // Alle Kindelemente von body durch die beiden oben erzeugten Elemente ersetzen
+    document.body.replaceChildren(cya, gifCya);
+} 
+****/ 
+
+//Die Berechnung des Betrags pro Tag
 function calcAmountPerDay() {
   // Konstanten, die die jeweiligen html Element enthalten
   const resultTextParagraph = document.getElementById("resultText");
@@ -73,9 +86,112 @@ function calcAmountPerDay() {
   }
 }
 
+//Verarbeiten der persönlichen Daten
 
-/* >>>>>> Hilfsfunktionen zur Berechnung <<<<<<<<<<< */
+function processPersonalData() {
+  let arrayCheckboxes = getCheckedCheckboxValues();
+  // Eingaben aus Selectbox
+  let selectBoxValue = selectBox.value;
+  errorDiv.innerHTML = "";
+  userDatenDiv.innerHTML = "";
+  textfeldDiv.innerHTML = "";
+  let noErrors = true;
+  let userName, userEmail, userAlter, radio;
+  userDatenDiv.style.backgroundColor = "white";
+  // Eingaben aus den Textfeldern:
+  if (validate(inputFieldName.value, "name")) {
+     userName = inputFieldName.value;
+  } else {
+    errorDiv.innerHTML += " >>> Namen eingeben/überprüfen "
+    noErrors = false;
+  }
+  if (validate(inputFieldEmail.value, "email")) {
+     userEmail = inputFieldEmail.value;
+    
+  } else {
+    errorDiv.innerHTML += " >>> Email eingeben/überprüfen "
+    noErrors = false;
+  }
+  if (validate(inputFieldAlter.value, "alter")) {
+     userAlter = inputFieldAlter.value;
+  } else {
+    errorDiv.innerHTML += " >>> Alter eingeben/überprüfen "
+    noErrors = false;
+  }
+  
+  // Eingaben aus Checkbox
+  if (arrayCheckboxes.length < 1) {
+    errorDiv.innerHTML += " >>> Mindestens ein Interesse auswählen ";
+    noErrors = false;
+  }
 
+  // Eingabe aus Radio
+  let radioBox = document.querySelector("input[name=lieblingstier]:checked");
+  if (!radioBox){
+    errorDiv.innerHTML += " >>> Lieblingstier auswählen ";
+    noErrors = false;
+  } else{
+     radio = radioBox.value;
+  }
+
+  if(noErrors){
+    if (selectBoxValue == "Prog- Rock/Metal") selectBoxValue += ", (nice!): >>> &#129304 &#129304 &#129304 &#128526 <<<";
+    userDatenDiv.style.backgroundColor = "grey";
+    userDatenDiv.innerHTML = ` Dein Name: ${userName}, deine Email: ${userEmail} und dein Alter: ${userAlter}.<br> 
+                                                         Dein Musikgenre ist: ${selectBoxValue}. <br> Dein Lieblingstier: ${radio} und deine Interessen sind:
+                                                         ${arrayCheckboxes.toString()}`;
+    console.log(`${userName}, ${userEmail}, ${userAlter}, ${selectBoxValue}, ${radio}, ${arrayCheckboxes}`);
+
+    if(meinung.value){
+      console.log(meinung.value);
+      textfeldDiv.innerHTML = "Dein Kommentar:<br>"
+      textfeldDiv.innerHTML += meinung.value;
+      textfeldDiv.style.backgroundColor = "chocolate";
+    }
+  }
+
+}
+
+/* >>>>>> Hilfsfunktionen <<<<<<<<<<< */
+function validate(feld, typ) {
+  switch (typ) {
+    case "name":
+      if (feld && /^[a-z]+$/i.test(feld)){
+        return true;
+      } 
+    break;
+    case "email":
+      if (feld && String(feld).toLowerCase().match(re)){
+        return true;
+      } 
+    break;   
+    case "alter":
+      if (feld && !isNaN(Number(feld))){
+        return true;
+      }
+    break;
+    default:
+      return false;
+  }
+}
+
+function getCheckedCheckboxValues() {
+  let array = []
+  let checkboxes = document.querySelectorAll('input[name=interessen]:checked')
+  for (let i = 0; i < checkboxes.length; i++) {
+    array.push(checkboxes[i].value)
+  }
+return array;
+}
+
+function hideShowElement(ele) {
+  let x = document.getElementById(ele);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 // Wieviele Tage hat der aktuelle Monat? Wieviele Tage sind noch übrig diesen Monat?
 function daysLeftCalc() {
   // new Date() ohne Parameter liefert ein Datumsobjekt des heutigen Tages. Es enhält u.a. Felder für Tag, Monat, Jahr, die hier in Konstanten abgelgt werden
