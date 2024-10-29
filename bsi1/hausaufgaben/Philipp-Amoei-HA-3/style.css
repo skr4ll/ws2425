@@ -1,0 +1,35 @@
+/* Anpassen der W3 styles: */
+*{
+    box-sizing: border-box;
+}
+.w3-display-container{
+    margin-left: -5px;
+}
+.accord {
+    color: green;
+    font-size: large;
+    background-color: black;
+
+}
+.buttons{
+    width: 35%;
+    font-weight: bold;
+    border-radius: 5px;
+    padding-right:75%;
+}
+.float-left{
+    float: left;
+    width: 30%;
+    margin-left: 5%;
+    overflow: auto;
+}
+h3{
+    margin-top: 3px;
+}
+#books{
+    width: 25%;
+}
+body{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 140%;
+}

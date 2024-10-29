@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+    
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hausaufgabe 3</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">     
+    <link rel="stylesheet" href="style.css"> 
+	  <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px">
+        <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px">
+            <a href="#home" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home"></i></a> 
+            <a href="#music" class="w3-bar-item w3-button" title="Gute Musik"><i class="fa fa-music"></i></a>
+            <a href="#book" class="w3-bar-item w3-button" title="Gute Bücher"><i class="fa fa-book"></i></a>
+            <a href="#film" class="w3-bar-item w3-button" title="Gute Filme"><i class="fa fa-film"></i></a>
+            <a href="#code" class="w3-bar-item w3-button" title="Coding Sachen"><i class="fa fa-code"></i></a>
+            <a href="#book" class="w3-bar-item w3-button" title="Gute Games"><i class="fa fa-gamepad"></i></a> 
+            <a href="mailto:skrall_pa@protonmail.com" class="w3-bar-item w3-button" title="Mail an mich"><i class="fa fa-envelope"></i></a> 
+            <a href="https://github.com/skr4ll" class="w3-bar-item w3-button" title="Meine GitHub-Seite"><i class="fa fa-globe"></i></a>
+        </div>
+        
+    </div>    
+    <div style="margin-left:70px">
+        <div class="w3-container">
+            <h1>Hausaufgabe 3</h1>
+            <section id="home">
+                <h2><i class="fa fa-home"></i> ---- Home ----</h2>
+                <p>
+                    Dies ist der Startbereich der Seite. Unter den verschiedenen Abschnitten finden sich die W3-CSS Elemente, um Musik, Bücher, Filme, Coding und Gaming content etc.
+                    anzuzeigen. Hierzu wurde eine Slideshow, sowie Accordions verwendet. Im nachfolgende Teil findet sich zudem die Tabelle um die Userdaten anzuzeigen. Per Klick auf
+                    "anzeigen", werden die Interessen der drei Beispieluser in einem Modal angezeigt.
+                </p>
+            <h2>Die Users in einer Tabelle</h2>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Alter</th>
+                            <th>Interessen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableUsers">
+                    </tbody>
+                </table>
+                <div id="id01" class="w3-modal">
+                    <div class="w3-modal-content">
+                      <div class="w3-container">
+                        <span onclick="closeModal()" class="w3-button w3-display-topright">&times;</span>
+                        <p id="interessenPar"></p>
+                      </div>
+                    </div>
+                  </div>   
+
+            </section>
+            <br>
+            <section id="music">
+                <h2><i class="fa fa-music"></i> ---- Musik ----</h2>
+                <h3>Ein paar coole Lieder in einer Slideshow:</h3>
+                <div class="w3-content w3-display-container" id="musicSlides">
+                    <iframe class="mySlides" style="border-radius:12px" src="https://open.spotify.com/embed/track/7FTf3bJuCq5UYHjUwggKNB?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> 
+                    <iframe class="mySlides" style="border-radius:12px" src="https://open.spotify.com/embed/track/03sEzk1VyrUZSgyhoQR0LZ?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe class="mySlides" style="border-radius:12px" src="https://open.spotify.com/embed/track/0Ga3szKsJOeZ0eAfydm1WV?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                  </div>
+            </section>
+            <br>
+            <section id="book">
+                <h2> <i class="fa fa-book"></i> ---- Bücher ----</h2>
+                <h3>Einige gute Bücher</h3>
+                <button onclick="myFunction('books')" id="buttonBooks" class="w3-button w3-block w3-left-align buttons">Bücher</button>
+                <div id="books" class="w3-hide accord">
+                    <p>Der Herr der Ringe</p>
+                    <p>Die Stadt der träumenden Bücher</p>
+                    <p>Der Name der Rose</p>  
+                </div>
+            </section>
+            <br>
+            <section id="film">
+                <h2><i class="fa fa-film"></i> --- Filme ----</h2>
+                <h3>Paar gute Filme nach Kategorien in Accordions:</h3>
+                <div class="float-left">
+                    <button onclick="myFunction('lustig')" id="buttonLustig" class="w3-button w3-block w3-left-align buttons">Lustig</button>
+                    <div id="lustig" class="w3-hide accord">
+                        <a href="https://www.rottentomatoes.com/m/fear_and_loathing_in_las_vegas" class="w3-button w3-block w3-left-align">Fear and Loathing in Las Vegas</a>
+                        <a href="https://www.rottentomatoes.com/m/monty_python_and_the_holy_grail" class="w3-button w3-block w3-left-align">Ritter der Kokosnuss (engl.)</a>
+                        <a href="https://www.rottentomatoes.com/m/tropic_thunder" class="w3-button w3-block w3-left-align">Tropic Thunder</a>
+                    </div>
+                </div>
+                <div class="float-left">
+                    <button onclick="myFunction('drama')" id="buttonDrama" class="w3-button w3-block w3-left-align buttons">Drama</button>
+                    <div id="drama" class="w3-hide accord">
+                        <a href="https://www.rottentomatoes.com/m/apocalypse_now" class="w3-button w3-block w3-left-align">Apocalypse Now</a>
+                        <a href="https://www.rottentomatoes.com/m/platoon" class="w3-button w3-block w3-left-align">Platoon</a>
+                        <a href="https://www.rottentomatoes.com/m/gran_torino" class="w3-button w3-block w3-left-align">Gran Torino</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+  </body>
+
