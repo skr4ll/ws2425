@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+button{
+    margin-bottom: 0.5%;
+    border: none;
+    width: 500px;
+}
+button:hover{
+    background-color: green;
+}
+.gameButton{
+    width: 120px;
+    height: 100px;
+}
+body{
+    margin-top: 5%;
+    text-align: center;
+}
+#menuDiv{
+    margin-top: 3%;
+    font-size: xx-large;
+}
+#optionsDiv{
+    font-size: small;
+}
+#anzahlRunden{
+    width: 5%;
+}
+#spGameDiv{
+    display: none;
+}
+#endScreenDiv{
+    display: none;
+}

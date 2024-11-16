@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+    
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singleplayer</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">     
+    <link rel="stylesheet" href="css/style.css"> 
+	  <script src="js/script.js" defer></script>
+  </head>
+  <body>
+    <h1>SCHNICK, SCHNACK... SCHNUCK!</h1>
+    <div id="menuDiv">
+      <button onclick="initGame(0)">Singleplayer</button><br>
+      <button onclick="initGame(1)">Multiplayer 1 VS 1</button><br>
+      <button onclick="initGame(2)">Human and 2 machine FFA</button><br>
+      <button onclick="initGame(3)">2 Human and 1 machine FFA</button><br>
+      <button onclick="initGame(4)">3 Human FFA</button><br>
+      <div id="optionsDiv">
+        <label for="name">Anzahl an Runden festlegen? (Default = 1):</label><br>
+        <input type="text" name="anzahlRunden" id="anzahlRunden">
+      </div>
+  </div>
+  <div id="endScreenDiv">
+    <button onclick="initGame(game_mode_id)" id="buttonNewGame">NEUE RUNDE?</button>
+    <button onclick="showMenu()" id="buttonMainMenu">HAUPTMENÜ</button>
+    <div id="endScreenTextDiv"></div>
+  </div>
+    <div id="spGameDiv">
+      <div id="winCounterDiv"></div>
+      <button class="gameButton" onclick="spGame(0)" id="buttonStein"><img src="img/stein.JPG" alt="STEIN"></button>
+      <button class="gameButton" onclick="spGame(1)" id="buttonSchere"><img src="img/schere.JPG" alt="SCHERE"></button>
+      <button class="gameButton" onclick="spGame(2)" id="buttonPapier"><img src="img/papier.JPG" alt="PAPIER"></button>
+      <br>
+      <div id="roundOutcomeDiv"></div><br>
+    </div>
+    <div id="choicesDiv">
+      <div id="player">DU: </div>
+      <div id="machine">PROG:</div>
+    </div><br>
+
+  </body>
+</html>
