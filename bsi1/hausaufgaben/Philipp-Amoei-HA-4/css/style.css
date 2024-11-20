@@ -25,10 +25,14 @@ body{
 #optionsDiv{
     font-size: small;
 }
-#anzahlRunden{
-    width: 5%;
+#roundOutcomeDiv{
+    color: green;
+    font-size: large;
 }
 #spGameDiv{
+    display: none;
+}
+#PvpDiv{
     display: none;
 }
 #endScreenDiv{
