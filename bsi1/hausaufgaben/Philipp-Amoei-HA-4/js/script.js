@@ -8,16 +8,17 @@ const div_highscore = document.getElementById("highscoreDiv");
 // Divs zum Ein- und Ausblenden der unterschiedlichen Bereiche
 const div_menu = document.getElementById("menuDiv");
 const div_singleplayer = document.getElementById("spGameDiv");
+const div_singleplayer3 = document.getElementById("spGameDiv3");
 const div_pvp = document.getElementById("PvpDiv");
 // Buttons
 const button_new_game = document.getElementById("buttonNewGame");
 const button_main_menu = document.getElementById("buttonMainMenu");
 const game_elements = ["img/stein.JPG", "img/schere.JPG", "img/papier.JPG"];
-let roundcounter = 0, number_of_rounds = 0, game_mode_id = 0;
+let roundcounter = 0, number_of_rounds = 1, game_mode_id = 0;
 // Spielerinstanzen
-const human_1 = new Player("SpielerEins"), human_2 = new Player("SpielerZwei"), computer_1 = new Player("ComputerEins");
+const human_1 = new Player("SpielerEins"), human_2 = new Player("SpielerZwei"), computer_1 = new Player("ComputerEins"), computer_2 = new Player("ComputerZwei");
 // Dieses Array dient der leichteren Auswertung für die Darstellung des Highscores
-const players = [human_1, computer_1, human_2];
+const players = [human_1, computer_1, human_2, computer_2];
 
 // FUNKTIONEN FÜR DEN PROGRAMMABLAUF:
 // Konstruktor für die Spielerinstanzen
@@ -44,10 +45,6 @@ function roundInput() {
         number_of_rounds = rounds;
         console.log(`rounds set to ${number_of_rounds}`)
     }
-    else{
-        number_of_rounds = 1;
-        console.log(`rounds set to ${number_of_rounds}`)
-    } 
 }
 // Das Menü wird angezeigt beim öffnen der Seite und nach Klick auf Button: HAUPTMENÜ (siehe endScreenDiv)
 function showMenu(){
@@ -86,13 +83,16 @@ function initGame(selected_game){
         case 0:
             div_singleplayer.style.display = "block";
             game_mode_id = selected_game;
-            break;
+        break;
         case 1:
             div_pvp.style.display = "block";
             game_mode_id = selected_game;
             pvpTwoPlayers();
-        default:
-            break;
+        break;
+        case 2:
+            div_singleplayer3.style = "block";
+            game_mode_id = selected_game;
+        break;
     }
     console.log(`game_mode_id = ${game_mode_id}`);
 }
@@ -114,7 +114,6 @@ function evalOutcome(){
                 players[1].updateStreak(players[1].streak_count);
                 players[0].streak_count = 0;
             } 
-            console.log(`HIGHEST-STREAK: player at: ${players[0].highest_streak} and machine at: ${players[1].highest_streak}`);
         break;
         // PvP 1v1
         case 1:
@@ -130,11 +129,26 @@ function evalOutcome(){
                 players[2].updateStreak(players[2].streak_count);
                 players[0].streak_count = 0;
             } 
-            console.log(`HIGHEST-STREAK: player at: ${players[0].highest_streak} and machine at: ${players[2].highest_streak}`);
-            
-        break;        
-        default:
-            break;
+        break;
+        // Singleplayer mit 2 Computern (Zufall)
+        case 2:
+            let most_wins = 0, winner_player = null, others = [];
+            players.forEach (p => {
+                if (p.wincount > most_wins){
+                    most_wins = p.wincount;
+                    winner_player = p;
+                }
+            });
+            winner_player.streak_count++;
+            players.forEach (p => {
+                p.updateStreak(p.streak_count);
+                if (p != winner_player){
+                    p.streak_count = 0;
+                    others.push(p);
+                }
+            });
+            endtext = `${winner_player.name} gewinnt mit ${winner_player.wincount} zu ${others[0].name}: ${others[0].wincount} zu ${others[1].name}: ${others[1].wincount}`;
+        break;
     }
     updateHighscore();
     endScreen(endtext);
@@ -150,13 +164,12 @@ function endScreen(string_endtext){
         case 0:
             div_singleplayer.style.display = "none";    
         break;
-    
-        default:
-            break;
+        case 2:
+            div_singleplayer3.style.display = "none";
+        break;
     }
     div_endscreen_text.innerHTML = "<br>" + game_over;
     div_endscreen.style.display = "block";
-
 }
 
 // FUNKTIONEN DER SPIELLOGIK:
@@ -169,6 +182,17 @@ function spGame(choice) {
         Du: <img src="${game_elements[choice]}" alt="Auswahl-1" style="vertical-align: middle;"> - 
         Programm: <img src="${game_elements[program_choice]}" alt="Auswahl-2" style="vertical-align: middle;">`;
     twoPlayerLogic(player_choice, program_choice);
+}
+function spGame3(choice) {
+    let player_choice = choice;
+    let program_1_choice = Math.floor(Math.random() * 3);
+    let program_2_choice = Math.floor(Math.random() * 3);
+     //let program_choice = 1;
+    div_choices.innerHTML = `
+        Du: <img src="${game_elements[player_choice]}" alt="Auswahl-1" style="vertical-align: middle;"> - 
+        ${computer_1.name} <img src="${game_elements[program_1_choice]}" alt="Auswahl-2" style="vertical-align: middle;">
+        ${computer_2.name} <img src="${game_elements[program_2_choice]}" alt="Auswahl-3" style="vertical-align: middle;">`;
+    threePlayerLogic(player_choice, program_1_choice, program_2_choice);
 }
 function pvpTwoPlayers() {
     const playRound = () => {
@@ -197,6 +221,7 @@ function twoPlayerLogic(choice_1, choice_2) {
         div_round_outcome.innerHTML = "Unentschieden: Runde wird wiederholt!";
     }
     else{
+        // ToDo Hier auch Schleife verwenden wie bei 3 Spielern!
         switch (choice_1) {
             case 0:
                 if (choice_2 == 1){
@@ -243,7 +268,54 @@ function twoPlayerLogic(choice_1, choice_2) {
                 if (roundcounter == number_of_rounds) evalOutcome();
             break;
         }
-        console.log(`${current_players[0].name} score: ${current_players[0].wincount} and ${current_players[1].name} score: ${current_players[1].wincount}`);
+    }
+}
+
+function threePlayerLogic(choice_1, choice_2, choice_3) {
+    const current_players = [];
+    const choices = [choice_1, choice_2, choice_3];
+    current_players.push(human_1, computer_1, computer_2);
+    
+    if (choice_1 == choice_2 && choice_2 == choice_3){
+        div_round_outcome.innerHTML = "Unentschieden: Runde wird wiederholt!";
+    }
+    else if (choice_1 != choice_2 && choice_2 != choice_3 && choice_1 != choice_3){
+        div_round_outcome.innerHTML = "Zirkuläre Runde!!!: Runde wird wiederholt!";
+    }
+    else{
+        div_round_outcome.innerHTML = "";
+    	for (let i = 0; i < 3; i++){
+      	    //console.log(`I ist: ${i}`)
+            for (let j = 0; j < 3; j++){
+                //console.log(`J ist: ${j}`)
+                if (j == i) {
+                    continue;
+                }
+                else{
+                    if (choices[i] == choices[j]) continue;
+                    else if (choices[i] == 0 && choices[j] == 1){
+                        div_round_outcome.innerHTML += `${current_players[i].name} schlägt ${current_players[j].name} und`
+                        current_players[i].wincount++;
+                        console.log(`${current_players[i].name} beats ${current_players[j].name}`); continue;
+                    }
+                    else if (choices[i] == 1 && choices[j] == 2){
+                        div_round_outcome.innerHTML += `${current_players[i].name} schlägt ${current_players[j].name} und`
+                        current_players[i].wincount++;
+                        console.log(`${current_players[i].name} beats ${current_players[j].name}`); continue;
+                    }
+                    else if (choices[i] == 2 && choices[j] == 0){
+                        div_round_outcome.innerHTML += `${current_players[i].name} schlägt ${current_players[j].name} und`
+                        current_players[i].wincount++;
+                        console.log(`${current_players[i].name} beats ${current_players[j].name}`); continue;
+                    }
+                    else continue;
+                }
+            }    
+        }
+        roundcounter++;
+        div_win_counter.innerHTML = `${current_players[0].name}: ${current_players[0].wincount} ${current_players[1].name}:
+                                     ${current_players[1].wincount} ${current_players[2].name}: ${current_players[2].wincount} -----> RUNDE: ${roundcounter} von ${number_of_rounds} <-----`;
+        if (roundcounter == number_of_rounds) evalOutcome();
     }
 }
 
