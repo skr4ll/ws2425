@@ -4,6 +4,7 @@ const div_round_outcome = document.getElementById("roundOutcomeDiv");
 const div_choices = document.getElementById("choicesDiv");
 const div_endscreen = document.getElementById("endScreenDiv");
 const div_endscreen_text = document.getElementById("endScreenTextDiv");
+const div_highscore = document.getElementById("highscoreDiv");
 // Divs zum Ein- und Ausblenden der unterschiedlichen Bereiche
 const div_menu = document.getElementById("menuDiv");
 const div_singleplayer = document.getElementById("spGameDiv");
@@ -11,13 +12,14 @@ const div_pvp = document.getElementById("PvpDiv");
 // Buttons
 const button_new_game = document.getElementById("buttonNewGame");
 const button_main_menu = document.getElementById("buttonMainMenu");
-// Arrays für die Zählung der einzelnen Siege, wins_count[0] ist SP1 und gleichzeitig der Singleplayer
 const game_elements = ["img/stein.JPG", "img/schere.JPG", "img/papier.JPG"];
 let roundcounter = 0, number_of_rounds = 0, game_mode_id = 0;
 // Spielerinstanzen
 const human_1 = new Player("SpielerEins"), human_2 = new Player("SpielerZwei"), computer_1 = new Player("ComputerEins");
+// Dieses Array dient der leichteren Auswertung für die Darstellung des Highscores
 const players = [human_1, computer_1, human_2];
 
+// FUNKTIONEN FÜR DEN PROGRAMMABLAUF:
 // Konstruktor für die Spielerinstanzen
 function Player(name) {
     this.name = name;
@@ -35,7 +37,7 @@ function Player(name) {
         }
       };
   }
-
+// Hier wird die ausgewählte Rundenzahl gesetzt
 function roundInput() {
     let rounds = document.getElementById("anzahlRunden").value;
     if (rounds && !isNaN(rounds) && rounds % 2 !== 0){
@@ -47,13 +49,28 @@ function roundInput() {
         console.log(`rounds set to ${number_of_rounds}`)
     } 
 }
-
+// Das Menü wird angezeigt beim öffnen der Seite und nach Klick auf Button: HAUPTMENÜ (siehe endScreenDiv)
 function showMenu(){
     div_choices.innerHTML = "", div_round_outcome.innerHTML = "", div_win_counter.innerHTML = "";
     div_endscreen.style.display = "none";
     div_menu.style.display = "block";
 }
+// Hier wird der Highscore der bereits teilnehmenden Spieler aktualisiert
+function updateHighscore() {
+    const sortedPlayers = players.sort((a, b) => b.highest_streak - a.highest_streak);
 
+    div_highscore.innerHTML = "<strong>Highscores (Streak):</strong><br>";
+
+    sortedPlayers.forEach(player => {
+        if (player.highest_streak > 0){
+            const playerEntry = document.createElement("p");
+            playerEntry.textContent = `${player.name}: ${player.highest_streak}`;
+            div_highscore.appendChild(playerEntry);
+        }
+
+    });
+}
+// Wird aufgerufen, wenn neue Runde beginnt (setzt die divs und den wincounter zurück und ruft den entsprechenden gamemode auf)
 function initGame(selected_game){
     roundInput();
     roundcounter = 0;
@@ -79,7 +96,7 @@ function initGame(selected_game){
     }
     console.log(`game_mode_id = ${game_mode_id}`);
 }
-
+// Sind alle festgelegten Runden gespielt, wird hier das Ergebnis eines Spiels ermittelt
 function evalOutcome(){
     let endtext = "";
     switch (game_mode_id) {
@@ -119,9 +136,10 @@ function evalOutcome(){
         default:
             break;
     }
+    updateHighscore();
     endScreen(endtext);
 }
-
+// Hier werden die Endergebnisse eines Spiels angezeigt (wird gecallt aus evalOutcome)
 function endScreen(string_endtext){
     let game_over = `GAME OVER...${string_endtext}`;
     div_win_counter.innerHTML = "";
@@ -141,10 +159,12 @@ function endScreen(string_endtext){
 
 }
 
+// FUNKTIONEN DER SPIELLOGIK:
+// Das Singleplayer Game. Hier werden Buttons zur Auswahl angezeigt, da sich kein zweiter Spieler vor dem Bildschirm befindet
 function spGame(choice) {
     let player_choice = choice;
-    let program_choice = Math.floor(Math.random() * 3);
-    // let program_choice = 1;
+    //let program_choice = Math.floor(Math.random() * 3);
+     let program_choice = 1;
     div_choices.innerHTML = `
         Du: <img src="${game_elements[choice]}" alt="Auswahl-1" style="vertical-align: middle;"> - 
         Programm: <img src="${game_elements[program_choice]}" alt="Auswahl-2" style="vertical-align: middle;">`;
@@ -152,29 +172,27 @@ function spGame(choice) {
 }
 function pvpTwoPlayers() {
     const playRound = () => {
+        div_pvp.innerHTML = "P1: Stein: a, Schere: s, Papier: d";
         keyboardInput((c_1, c_2) => {
             console.log(`Processing inputs: ${c_1}, ${c_2}`);
             div_choices.innerHTML = `${players[0].name}: <img src="${game_elements[c_1]}" alt="Auswahl-1" style="vertical-align: middle;"> - 
                                      ${players[2].name}: <img src="${game_elements[c_2]}" alt="Auswahl-2" style="vertical-align: middle;">`;
             twoPlayerLogic(c_1, c_2);
 
-            // Continue to the next round if the game is not over
             if (roundcounter < number_of_rounds) {
                 playRound(); // Call itself for the next round
             }
         });
     };
 
-    // Start the first round
     playRound();
 }
 
-
 function twoPlayerLogic(choice_1, choice_2) {
     let current_players = [];
-    current_players[0] = players[0];
-    if (game_mode_id === 0) current_players[1] = players[1];
-    else current_players[1] = players[2];
+    current_players[0] = human_1;
+    if (game_mode_id === 0) current_players[1] = computer_1;
+    else current_players[1] = human_2;
     if (choice_1 == choice_2){
         div_round_outcome.innerHTML = "Unentschieden: Runde wird wiederholt!";
     }
@@ -192,7 +210,7 @@ function twoPlayerLogic(choice_1, choice_2) {
                 roundcounter++;
                 div_win_counter.innerHTML = `${current_players[0].name}: ${current_players[0].wincount} ${current_players[1].name}:
                                              ${current_players[1].wincount}  RUNDE: ${roundcounter} von ${number_of_rounds}`;
-                if (roundcounter == number_of_rounds) evalOutcome(game_mode_id);
+                if (roundcounter == number_of_rounds) evalOutcome();
             break;
             
             case 1:
@@ -207,7 +225,7 @@ function twoPlayerLogic(choice_1, choice_2) {
                 roundcounter++;
                 div_win_counter.innerHTML = `${current_players[0].name}: ${current_players[0].wincount} ${current_players[1].name}:
                                              ${current_players[1].wincount} -----> RUNDE: ${roundcounter} von ${number_of_rounds} <-----`;
-                if (roundcounter == number_of_rounds) evalOutcome(game_mode_id);
+                if (roundcounter == number_of_rounds) evalOutcome();
             break;            
             
             case 2:
@@ -222,7 +240,7 @@ function twoPlayerLogic(choice_1, choice_2) {
                 roundcounter++;
                 div_win_counter.innerHTML = `${current_players[0].name}: ${current_players[0].wincount} ${current_players[1].name}:
                                              ${current_players[1].wincount} RUNDE: ${roundcounter} von ${number_of_rounds}`
-                if (roundcounter == number_of_rounds) evalOutcome(game_mode_id);
+                if (roundcounter == number_of_rounds) evalOutcome();
             break;
         }
         console.log(`${current_players[0].name} score: ${current_players[0].wincount} and ${current_players[1].name} score: ${current_players[1].wincount}`);
@@ -243,18 +261,17 @@ function keyboardInput(cb) {
         ["p", 2]
     ]);
     const keyDownHandler = (event) => {
-        
         if(!p1_key && keys_p1.has(event.key)) {
             p1_key = event.key;
-            console.log(`Pressed was: ${p1_key} with val: ${keys_p1.get(p1_key)}`);
             p1_choice = keys_p1.get(p1_key);
+            div_pvp.innerHTML = "P2: Stein: i, Schere: o, Papier: p";
         }
         else if(p1_key && keys_p2.has(event.key)) {
             const p2_key = event.key;
-            console.log(`Pressed was: ${p2_key} with val: ${keys_p2.get(p2_key)}`);
             p2_choice = keys_p2.get(p2_key);
             document.removeEventListener('keydown', keyDownHandler);
             p1_key = null;
+            div_pvp.innerHTML = "";
             cb(p1_choice, p2_choice);
         }
     };
