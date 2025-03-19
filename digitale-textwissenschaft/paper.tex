@@ -1,0 +1,97 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage[backend=biber,style=authoryear,giveninits=false]{biblatex}
+\addbibresource{references.bib}
+\usepackage{authblk}
+\usepackage[a4paper,top=2.5cm]{geometry}
+
+\title{Die Edition von Losbüchern:\\ Von der Modellierung zur Visualisierung}
+\author{Philipp}
+\vspace{5mm}
+\affil{\textit{Hauptseminar: Methoden der digitalen Textwissenschaft – Von magischen Texten zu digitalen Spielen}
+\vspace{1mm} \\ Universität zu Köln \\ \vspace{1mm}Wintersemester 2024/25}
+\vspace{5mm}
+\date{\today}
+\vspace{5mm}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    \noindent % Verhindert die Einrückung der ersten Zeile
+    Dies ist ein Platzhalter-Abstract für das Paper über die Edition von Losbüchern. Hier wird eine kurze Zusammenfassung des Forschungsgegenstands, der Methoden und der zentralen Ergebnisse gegeben. 
+	Der Abstract sollte nicht länger als 150–200 Wörter sein und dem Leser einen schnellen Überblick über die Arbeit bieten. \\[5pt] % Optional: Abstand zum nächsten Abschnitt
+    \textbf{Schlüsselwörter:} Losbücher, digitale Edition, Textmodellierung, Visualisierung, digitale Geisteswissenschaften
+\end{abstract}
+
+\newpage
+\section{Einleitung}
+
+\section{Digitale Editionen und Losbücher}
+	\subsection{Digitale Editionen}
+	Editionen stellen eine essentielle Grundlage der philologischen und historischen Forschungsarbeit dar. 
+	Viele historische Quellen sind nicht mehr im Original vorhanden und durch Kopien überliefert worden. 
+	Da oft eine Vielzahl unterschiedlicher Kopien zu einem Ausgangswerk existieren, die sich mal mehr und mal weniger stark voneinander unterscheiden, 
+	ist es die Hauptaufgabe von (kritischen) Editionen, diese Abweichungen zu vergleichen und einzuordnen. \\
+	Die Edition dieser Urtexte kann in unterschiedlicher Ausprägung erfolgen: Als diplomatische Edition 
+	(Es wird eine möglichst originalgetreue Wiedergabe der Handschrift oder des Drucks angestrebt), als interpretative Edition (Der Text wird überarbeitet, 
+	um ihn heutigen Lesern verständlich zu machen) und in kritischer Edition, wobei die historisch-kritische Ausgabe (HKA) die umfassendste Form dieser 
+	Editionsvariante darstellt, um höchste wissenschaftliche Ansprüche zu erfüllen \parencite[S.~236]{SahlDigi2013a}. Hierbei werden durch umfangreiche Methoden wie z.B. 
+	der stemmatologischen Methode alle erdenklichen Textzeugen herangezogen und ein umfassender kritischer Apparat (enthält die editorischen Erläuterungen 
+	zu den Unterschieden im Text) erstellt. Gerade die stemmatologische Methode ist sehr aufwändig und versucht, einen Stammbaum für einen verlorenen Urtext 
+	zu finden. Sie führt oft nicht zu diesem Ziel, da in vielen Zwischenschritten innerhalb der Genealogie des Textes bereits Eingriffe erfolgt sind \parencite[S.~115]{SahlDigi2013a}.\\
+	Dieser Begriff der Edition bezieht sich auf gedruckte Werke. Diese stehen im Gegensatz zu digitalen Editionen, die sich die Möglichkeiten der heutigen 
+	Informationstechnologie zunutze machen. Bei gedruckten Editionen ist es notwendig, sich auf eine Form festzulegen, wohingegen es bei digitalen Editionen möglich ist, 
+	in derselben Ressource unterschiedliche Editionsformen anzubieten. Zudem ermöglichen digitale Editionen eine einfachere Markierung aller Editierungen und führen somit 
+	zu einer hohen Transparenz der Edition \parencite[S.~131]{SahlDigi2013b}.  
+	Weitere Vorteile von digitalen Editionen sind die leichte Erweiterbarkeit und Anpassbarkeit. Hierbei muss vor allem aber auch zwischen digitalen Editionen und 
+	digitalisierten Editionen unterschieden werden, wobei digitale Editionen nicht ohne weiteres in analoge Editionen umgewandelt werden können \parencite[S.~27]{sahle2016}.
+	
+	
+	\subsection{Losbücher}
+		\subsubsection{Was sind Losbücher?}
+		Losbücher sind eine Form der Wahrsageliteratur, die insbesondere im Mittelalter und der Frühen Neuzeit weite Verbreitung fand. Sie dienten als Hilfsmittel zur Entscheidungsfindung und basierten auf 
+		verschiedenen zufallsbasierten Verfahren. 
+		Der Begriff \textit{Losbuch} existiert in der deutschen Sprache seit dem 13. Jahrhundert. Er ist eine Wortschöpfung im deutschsprachigen Raum, da diesem Begriff kein 
+		direktes lateinisches Äquivalent gegenübersteht. Diese ersten Erwähnungen entstammen alle aus der Absicht, die Nutzer vor diesen Texten zu warnen und kritisieren die 
+		Losbücher dafür, Aberglauben zu verbreiten \parencite[S.~23 f.]{heiles}.\\
+		Laut Heiles kann dieser Begriff auch als historische Textsorte begriffen werden, da er in den zeitgenössischen Quellen ohne weitere Erläuterung genannt wird und 
+		somit ein allgemein verbreitetes Wissen über diese Texte nahelegt \parencite[S.~26]{heiles}.
+		Zur genaueren Definition und Eingrenzung unterscheidet Heiles zwei Typen von Losbüchern: diejenigen ohne und diejenigen mit Fragen \parencite[S.~39]{heiles}. Beim 
+		erstgenannten Typus wird die Funktion des Buches als Losbuch oftmals nur durch Würfelsymbole, Zahlen, Karten oder Ähnliches am Seitenrand ersichtlich, ohne welche 
+		sich diese nur als bloße Spruchsammlungen darstellen würden. Diese Symbole erfüllen einen essentiellen Bestandteil für diese Textsorte und seien somit auch als Teil des Textes 
+		zu verstehen \parencite[S.~46]{heiles}. Die Sprüche in diesen Büchern sind somit einem Würfelergebnis etc. zugeordnet, um zu dem ausgelosten Abschnitt zu gelangen.\\
+		Beim zweiten Typus enthalten die Losbücher einen Fragenkatalog, über den ausgewählt werden kann, welche Art von Vorhersage man erhält. Hier ist der Losmechanismus sehr 
+		häufig in Form eines drehbaren Rades in das Buch selbst integriert \parencite[S.~56]{heiles}.
+		\subsubsection{Das Losbuch Konrad Bollstatters}
+		Das Losbuch, das in dieser Arbeit exemplarisch in eine digitale Edition überführt werden soll, stammt aus der handschriftlichen Losbuchsammlung Konrad Bollstatters (München, Staatsbibl., Cgm 312).  
+		Diese Sammlung wurde im Zeitraum von 1450 bis 1473 von Bollstatter und weiteren Helfern angefertigt \parencite[S.~239]{heiles}. Aus dieser Sammlung wurde das Losbuch \textit{Seltzsams Loßpuch} (Folio 120 bis 142) 
+		ausgewählt.\\
+		Das Buch basiert auf einer Sammlung von 16 Fragen, die unterschiedliche Bereiche des Lebens betreffen. Wurde eine Frage ausgewählt, müssen zwei Würfel geworfen werden, wobei die Würfelsumme 11 und 12 nicht gelten. 
+		Vermittels der legitimen Würfelsummen muss der Nutzer dann weiterblättern und unter 12 unterschiedlichen Scheiben die Richtige heraussuchen. Hierbei können drei Summen auf dieselbe Scheibe verweisen. 
+		Diese Scheiben sind in 12 Teilstücke unterteilt, welche die Fragen enthalten. Eine Scheibe kann zwar die richtige Zahl, aber nicht die gewählte Frage enthalten. Dann muss der Nutzer weitersuchen, 
+		bis die korrekte Scheibe gefunden wurde (korrekte Zahl und gewählte Frage).\\
+		Ist dieser Vorgang erfolgreich abgeschlossen, muss man dem Verweis des Teilstücks folgen. Diese verweisen auf einen von 16 Königen, die eine Antwort auf die Frage geben können oder auf 16 weitere 
+		Autoritäten, wie z. B. biblische Figuren etc. verweisen, die die Frage final beantworten können \parencite[S.~4]{cugliana}.
+
+
+\section{Modellierung und Visualisierung einer digitalen Edition als Webanwendung}
+	\subsection{Editionsvarianten in der Anwendung}
+		\subsubsection{Faksimile}
+		\subsubsection{Diplomatische Edition}
+		\subsubsection{Interpretative Edition mit TEI-XML}
+	\subsection{Gestaltung des Benutzerinterfaces}
+		\subsubsection{Navigations- und Einstellungsmöglichkeiten}
+		\subsubsection{Interaktiver Spielmodus}
+
+\section{Zusammenfassung und Ausblick}
+
+
+\printbibliography
+
+
+\end{document}
