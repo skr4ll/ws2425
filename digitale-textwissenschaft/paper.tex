@@ -10,20 +10,14 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{setspace}
+\usepackage{float}
 \onehalfspacing
 \renewcommand{\familydefault}{\sfdefault} \usepackage{helvet}
 
-\lstset{
-	inputencoding=utf8,
-    extendedchars=true,  % Unterstützt erweiterte Zeichen
-    literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {ß}{{\ss}}1,
-	 tabsize=3
-}
-
-
 % Eigene TEI-XML Sprache definieren
 \lstdefinelanguage{TEI-XML}{
-    morekeywords={TEI, teiHeader, fileDesc, titleStmt, title, publicationStmt, sourceDesc, p, text, body, div, code, head, table, row, cell, hi}, % TEI-spezifische Tags
+    morekeywords={TEI, teiHeader, fileDesc, titleStmt, title, publicationStmt, sourceDesc, p, text, body, 
+	div, code, head, table, row, cell, hi,choice, expan, abbr, orig, reg}, % TEI-spezifische Tags
     sensitive=false, % Groß-/Kleinschreibung nicht beachten
     morecomment=[s]{<!--}{-->}, % XML-Kommentare
     morestring=[b]", % Zeichenketten in Attributen
@@ -32,13 +26,21 @@
     stringstyle=\color{red}, % Zeichenketten in Rot
 }
 
+\lstset{
+	inputencoding=utf8,
+    extendedchars=true,  % Unterstützt erweiterte Zeichen
+    literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {ß}{{\ss}}1,
+	tabsize=3,
+	language=TEI-XML
+}
+
 
 \title{Die Edition von Losbüchern:\\ Von der Modellierung zur Visualisierung}
 \author{Philipp}
 \vspace{5mm}
-\affil{\textit{Hauptseminar: Methoden der digitalen Textwissenschaft – Von magischen Texten zu digitalen Spielen}
-\vspace{1mm} \\ Universität zu Köln \\ \vspace{1mm}Wintersemester 2024/25}
-\vspace{5mm}
+\affil{\textit{Hauptseminar: Methoden der digitalen Textwissenschaft – Von magischen Texten zu digitalen Spielen}\\Dr. Elisa Cugliana
+\vspace{3mm} \\ Universität zu Köln \\ \vspace{1mm}Wintersemester 2024/25}
+\vspace{10mm}
 \date{\today}
 \vspace{5mm}
 
@@ -48,13 +50,18 @@
 
 \begin{abstract}
     \noindent % Verhindert die Einrückung der ersten Zeile
-    Dies ist ein Platzhalter-Abstract für das Paper über die Edition von Losbüchern. Hier wird eine kurze Zusammenfassung des Forschungsgegenstands, der Methoden und der zentralen Ergebnisse gegeben. 
-	Der Abstract sollte nicht länger als 150–200 Wörter sein und dem Leser einen schnellen Überblick über die Arbeit bieten. \\[5pt] % Optional: Abstand zum nächsten Abschnitt
+	Digitale Editionen bieten die Möglichkeit ein hoch anpassbares Benutzererlebnis zu ermöglichen. In dieser Arbeit wird gezeigt, wie eine digitale Edition zu einem mittelalterlichen Losbuch gestaltet sein könnte. 
+	Es wird auf die Strukturierung und Oberflächengestaltung eingegangen, sowie ein interaktiver Spielmodus vorgestellt. \\[5pt] % Optional: Abstand zum nächsten Abschnitt
     \textbf{Schlüsselwörter:} Losbücher, digitale Edition, Textmodellierung, Visualisierung, digitale Geisteswissenschaften
 \end{abstract}
 
 \newpage
+ 
 \section{Einleitung}
+	In dieser Arbeit soll gezeigt werden, wie digitale Technologien verwendet werden können, um Editionen von mittelalterlichen Losbüchern zu erstellen.
+	Die Grundlage hierfür bildet ein Mockup, das im Rahmen eines Gruppenprojektes entstanden ist. Es soll gezeigt werden, wie man unterschiedliche editorische Ansätze
+	innerhalb einer einzigen Edition kombinieren und die zugrundliegende Struktur eines Losbuches mithilfe von TEI-XML abbilden kann. Weiterhin wird gezeigt wie ein Interaktiver
+	Spielmodus zu einem Losbuch gestaltet sein könnte. Die finale Edition liegt dann als Webanwendung vor, die die genannten Elemente in sich vereint.
 
 \section{Digitale Editionen und Losbücher}
 	\subsection{Digitale Editionen}
@@ -116,23 +123,21 @@
 			Zur besseren Lesbarkeit wird eine diplomatische Edition bereitgestellt, die eine buchstabengetreue 
 			Transkription des dargestellten Textes bietet. Es werden keine Eingriffe vorgenommen und es wird über 
 			Unicode versucht, möglichst alle Eigenheiten der Lettern zu reproduzieren. Um die Struktur des Buches nachzubilden, 
-			wird TEI-XML verwendet. In der Anwendung wird dieses in HTML geparsed und entsprechend angezeigt (Abb. 1).
+			wird TEI-XML verwendet. In der Anwendung wird dieses in HTML geparsed und entsprechend angezeigt (\hyperref[Abbildung1]{Abb. 1}).
 			\vspace{5pt}
-			\begin{figure}[htbp]
+			\begin{figure}[h]
+				\label{Abbildung1}
 				\centering
-				\includegraphics[width=0.9\textwidth]{abb-1-tei-parsed.JPG}
-				\caption{HTML Darstellung der TEI-XML Struktur einer Scheibe.}
-				\label{Abbildung 1}
+				\includegraphics[width=0.65\textwidth]{abb-1-tei-parsed.JPG}
+				\caption{\footnotesize{\textit{HTML Darstellung der TEI-XML Struktur einer Scheibe.}}}
+				
 			\end{figure}
 			Das TEI Mark Up hierfür ist absichtlich einfach gehalten. Es setzt sich aus einer Tabelle zusammen, die die entsprechende
 			Scheibe darstellt. Der TEI-XML Code sieht für dieses Beispiel folgendermaßen aus:
-\vspace{5mm}			
-
 \begin{lstlisting}[
-    language=TEI-XML, 
     basicstyle=\ttfamily\small,    % Kleinere Schrift
     frame=single,         % Einfache Rahmenlinie
-    caption={TEI-XML für den Ausschnitt einer Scheibe}, % Titel unter dem Listing
+    caption={\footnotesize{\textit{TEI-XML für den Ausschnitt einer Scheibe}}}, % Titel unter dem Listing
 	captionpos=b,
     label={lst:tei-example}, % Label für Verweise im Text
     numbers=left,         % Zeilennummern links anzeigen
@@ -166,25 +171,68 @@
 		ermöglicht werden, das Losbuch zu verstehen. TEI wird hierbei verwendet, um Ergänzungen erkenntlich zu machen, wie z. B. 
 		ausgeschriebene Abkürzungen oder Einfügungen moderner Sprachformen. Diese Ergänzungen sollen dann in der Anwendung angezeigt 
 		werden, wenn der Nutzer seinen Mauszeiger über das entsprechende Wort bewegt. Hierbei werden Abkürzungen automatisch erweitert oder 
-		moderne Wortformen angezeigt in einem Kontextmenü angezeigt (Abb. 2). 
-		Wenn für eine Abkürzung zudem eine moderne Wortform angegeben ist, wird diese in Klammern dahinter angezeigt (Abb. 3).
+		moderne Wortformen in einem Kontextmenü angezeigt (\hyperref[Abbildung2]{Abb. 2}). 
+		Wenn für eine Abkürzung zudem eine moderne Wortform angegeben ist, wird diese in Klammern dahinter angezeigt (\hyperref[Abbildung3]{Abb. 3}).
+		Das zugrundlegende TEI-XML (Listing 2) nutzt \lstinline{<choice>} Elemente um derartige Ergänzungen zu markieren. Hierin werden dann
+		\lstinline{<abbr>} und \lstinline{<expan>} für die Abkürzungen und \lstinline{<orig>}\lstinline{<reg>} für Ergänzungen moderner
+		Wortformen genutzt.
 			\begin{figure}[htbp]
+				\label{Abbildung2}
 				\centering
 				\includegraphics[width=0.9\textwidth]{abb-2-tei-parsed-hover-ougen.JPG}
-				\caption{Mouseover zeigt ein Kontextmenü}
-				\label{Abbildung 2}
+				\caption{\textit{Mouseover zeigt ein Kontextmenü}}
+				
 			\end{figure}
 			\begin{figure}[htbp]
+				\label{Abbildung3}
 				\centering
 				\includegraphics[width=0.9\textwidth]{k-kunig-koenig-onhover.png}
-				\caption{Mouseover erweitert Abkürzung}
-				\label{Abbildung 3}
+				\caption{\textit{Mouseover erweitert Abkürzung}}
+				
 			\end{figure}
+	\newpage
+	\begin{lstlisting}[
+			basicstyle=\ttfamily\small,    % Kleinere Schrift
+			frame=single,         % Einfache Rahmenlinie
+			caption={\footnotesize{\textit{TEI-XML eines edierten Scheibenstücks}}}, % Titel unter dem Listing
+			captionpos=b,
+			label={lst:tei-example}, % Label für Verweise im Text
+			numbers=left,         % Zeilennummern links anzeigen
+			numberstyle=\tiny,    % Sehr kleine Zeilennummern
+			breaklines=true       % Zeilenumbruch bei langen Zeilen
+		]
+	<row>
+		<cell>
+			Du hast V 
+				<choice>
+					<orig>ougen</orig>
+					<reg>Augen</reg>
+				</choice>
+			geworffen.
+		</cell>
+		<cell>
+			Ob dir daz züge, darnach du stellest. So gang an
+		<cell>
+			die II. zeil zu dem
+				<choice>
+					<abbr>k</abbr>
+					<expan>
+						<choice>
+							<orig>kunig</orig>
+							<reg>König</reg>
+						</choice>
+					</expan>
+				</choice>
+			von Franckreych.
+		</cell>
+	</row>
+	\end{lstlisting}
+	
 	\subsection{Gestaltung des Benutzerinterfaces}
 		\subsubsection{Navigations- und Einstellungsmöglichkeiten}
 		Die im vorigen Kapitel erläuterten Elemente sollen über ein Benutzerinterface konfigurierbar sein. 
 		Dieses Interface ist folgendermaßen aufgebaut: Auf jeder Seite gibt es Kontrollelemente wie Buttons und Toggles, 
-		mit denen die visuellen Elemente ein- und ausgeblendet werden können. Abbildung 4 zeigt beispielhaft den Aufbau einer Seite mit 
+		mit denen die visuellen Elemente ein- und ausgeblendet werden können. (\hyperref[Abbildung4]{Abbildung 4}) zeigt beispielhaft den Aufbau einer Seite mit 
 		aktiviertem Faksimile und interpretativer Edition.\\
 		Im Header befindet sich ein Toggle, um zwischen Editions- und Spielmodus zu wechseln (siehe nächstes Kapitel). 
 		In der Mitte des Headers befindet sich ein Navigationsfeld für die Losbuchseiten samte eines Suchfeldes. Rechts 
@@ -197,32 +245,38 @@
 			\begin{figure}[htbp]
 				\centering
 				\includegraphics[scale=0.3]{ansicht-startseite-editionsmodus.JPG}
-				\caption{Die Seite einer Scheibe im Editionsmodus}
-				\label{Abbildung 4}
+				\caption{\textit{Die Seite einer Scheibe im Editionsmodus}}
+				\label{Abbildung4}
 			\end{figure}
 
 		\subsubsection{Interaktiver Spielmodus}
 		Der Spielmodus bietet ein interaktives Erlebnis des Losbuches. Hier kann man direkt in der Webanwendung alle Schritte des Losbuchspiels aktiv ausführen.
 		Es gibt zwei Varianten des Spiels: Einen \textit{Easy mode} und einen \textit{Hard mode}. Man beginnt auf der Seite mit den Fragen, von denen man eine per Klick 
 		auswählt. Im \textit{Easy mode} werden die Fragen transkribiert in einer Liste angezeigt, wohingegen man im \textit{Hard mode} die Frage innerhalb des Faksimiles 
-		anklicken muss. In beiden Spielvarianten ist ein Würfelbutton rechts plaziert um den Wurf zu generieren. Im \textit{Easy mode} erscheint nun ein neuer Button, den man 
+		anklicken muss. In beiden Spielvarianten ist ein Würfelbutton rechts platziert um den Wurf zu generieren. Im \textit{Easy mode} erscheint nun ein neuer Button, den man 
 		klickt, um direkt zur richtigen Scheibe zu gelangen. Im \textit{Hard mode} muss man nun selbst tätig werden und das Buch nach der Scheibe mit der richtigen Kombination
 		von Zahl und Frage durchsuchen. Von dort aus setzt sich dieses Spiel dann so fort. Im \textit{Hard mode} muss man alles selbst suchen, im \textit{Easy mode} wird man über dokumentinterne Hyperlinks an die
-		richtige Stelle weitergeleitet. Die Abbildungen 5 und 6 zeigen die Unterschiede jeweils auf. Im \textit{Hard mode} erhält man zudem die Möglichkeit, das Faksimile in den Vollbildmodus zu versetzen.
-					\begin{figure}[htbp]
+		richtige Stelle weitergeleitet. Die Abbildungen (\hyperref[Abbildung5]{5}) und (\hyperref[Abbildung6]{6}) zeigen die Unterschiede jeweils auf. Im \textit{Hard mode} erhält man zudem die Möglichkeit, das Faksimile in den Vollbildmodus zu versetzen.
+		
+			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.3]{ansicht-gamemodus-easy.JPG}
-				\caption{Die Startseite im \textit{Easy mode} Spielmodus}
-				\label{Abbildung 5}
+				\caption{\textit{Die Startseite im \textbf{Easy mode} Spielmodus}}
+				\label{Abbildung5}
 			\end{figure}
-			\begin{figure}[htbp]
+			\begin{figure}[H]
+				\label{Abbildung6}
 				\centering
 				\includegraphics[scale=0.3]{ansicht-gamemodus-hard.JPG}
-				\caption{Die Startseite im \textit{Hard mode} Spielmodus}
-				\label{Abbildung 5}
+				\caption{\textit{Die Startseite im \textbf{Hard mode} Spielmodus}}
 			\end{figure}
 
 \section{Zusammenfassung und Ausblick}
+	In dieser Arbeit konnte gezeigt werden wie digitale Methoden eingesetzt werden können, um historische Dokumente, wie Losbücher zu modellieren und zugänglich zu machen.
+	Durch einen Spielmodus kann das Benutzererlebnis interaktiv gestaltet werden und stellt nochmal eine spezielle Art \textit{Edition} dar.
+	Die Modellierung mit TEI-XML erweist sich als guter Ausgangspunkt, um einen klaren Überblick zu erhalten. Da die Struktur des verwendeten Losbuches jedoch sehr komplex ist,
+	stößt man mit einer hierarisch gestützten Modellierung, wie bei XML schnell an Grenzen \parencite[S.~8]{cugliana}. Es könnten alternative Modellierungen als Basis der Edition entwickelt 
+	werden (z.B. graphenbasierte Modellierungen wie bei \cite{cugliana}).
 
 
 \printbibliography
